@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{number_to_words}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ivan Torres"]
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{Gem for Ruby on Rails to describe a number in words}
   s.email = %q{mexpolk@gmail.com}
   s.extra_rdoc_files = ["README.rdoc", "lib/number_to_words.rb"]
-  s.files = ["README.rdoc", "Rakefile", "init.rb", "lib/number_to_words.rb", "Manifest", "number_to_words.gemspec"]
+  s.files = ["number_to_words.gemspec", "Manifest", "README.rdoc", "Rakefile", "init.rb", "lib/number_to_words.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/innetra/number_to_words}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Number_to_words", "--main", "README.rdoc"]
