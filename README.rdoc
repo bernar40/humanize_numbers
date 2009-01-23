@@ -1,4 +1,4 @@
-= Easy Navigation
+= Number To Words
 
 Rails gem/plugin to describe a number in words.
 
