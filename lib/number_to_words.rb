@@ -33,9 +33,9 @@ module NumberToWords
             if groups[number].to_i > 0
               case number
               when 1,3,5,7,9
-                words << "mil"
+                words << "thousand"
               else
-                words << (groups[number].to_i > 1 ? "#{self.quantities[number]}ones" : "#{self.quantities[number]}ón")
+                words << (groups[number].to_i > 1 ? "#{self.quantities[number]}" : "#{self.quantities[number]}")
               end
               words << number_to_words(groups[number])
             end
@@ -49,35 +49,32 @@ module NumberToWords
       protected
 
       def and_string
-        "y"
+        ""
       end
 
       def zero_string
-        "cero"
+        "zero"
       end
 
       def units
-        %w[ ~ un dos tres cuatro cinco seis siete ocho nueve ]
+        %w[ ~ one two three four five six seven eight nine ]
       end
 
       def tens
-        %w[ ~ diez veinte treinta cuarenta cincuenta sesenta setenta ochenta noventa ]
+        %w[ ~ ten twenty thirty fourty fifty sixty seventy eighty ninety ]
       end
 
       def hundreds
-        %w[ cien ciento doscientos trescientos cuatrocientos quinientos seiscientos setecientos ochocientos novecientos ]
+        [ nil, 'one hundred', 'two hundred', 'three hundred', 'four hundred', 'five hundred', 'six hundred', 
+'seven hundred', 'eight hundred', 'nine hundred']
       end
 
       def teens
-        %w[ diez once doce trece cartoce quince dieciseis diecisiete dieciocho diecinueve ]
-      end
-
-      def twenties
-        %w[ veinte veintiun veintidos veintitres veinticuatro veinticinco veintiseis veintisiete veintiocho veintinueve ]
+        %w[ ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen ]
       end
 
       def quantities
-        %w[ ~ ~ mill ~ bill ~ trill ~ cuatrill ~ quintill ~ ]
+        %w[ ~ ~ million ~ billion ~ trillion ~ ]
       end
 
       def number_to_words(number)
@@ -100,8 +97,6 @@ module NumberToWords
           case tens
             when 1
               text << (units == 0 ? self.tens[tens] : self.teens[units])
-            when 2
-              text << (units == 0 ? self.tens[tens] : self.twenties[units])
             else
               text << self.tens[tens]
           end
@@ -110,7 +105,7 @@ module NumberToWords
         if units > 0
           if tens == 0
             text << self.units[units]
-          elsif tens > 2
+          elsif tens > 1
             text << "#{self.and_string} #{self.units[units]}"
           end
         end

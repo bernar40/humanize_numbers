@@ -25,12 +25,15 @@ And you're done!
 
 == Usage
 
-For now it only works for spanish:
+This fork has been modified to return English, it isn't perfect and it
+doesn't retain the spanish as a config option:
 
   1235.to_words
-  => "un mil doscientos treinta y cinco"
+  => "one thousand thirty five"
 
 == License
+
+English version: Copyright (c) 2009 James Rowe
 
 Copyright (c) 2008 Innetra Consultancy Services, S.C.
 
