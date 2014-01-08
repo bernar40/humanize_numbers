@@ -1,4 +1,4 @@
-= Number To Words
+= Humanize Number
 
 Rails gem/plugin to describe a number in words.
 
