@@ -19,7 +19,7 @@ And from the command line run:
 
 This fork has been modified to return English and Spanish, it isn't perfect:
 
-  9736.to_words
+  9736.humanize
   => "nine thousand seven hundred thirty six" (English)
   => "nueve mil setecientos treinta y seis" (Spanish)
 
