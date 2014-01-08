@@ -3,4 +3,4 @@ Manifest
 README.rdoc
 Rakefile
 init.rb
-lib/number_to_words.rb
+lib/humanize_numbers.rb
