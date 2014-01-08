@@ -1,4 +1,4 @@
-number_to_words.gemspec
+humanize_numbers.gemspec
 Manifest
 README.rdoc
 Rakefile
