@@ -12,17 +12,19 @@ module NumberToWords
 
     module InstanceMethods
 
-
       def humanize
 
         words = []
 
-        number = self.to_i
+        number = self.to_f
 
         if number.to_i == 0
           words << self.zero_string
         else
-          number = number.to_s.rjust(33,'0').reverse
+          decimal = number.to_s.split(".")[1].nil? ? 0 : number.to_s.split(".")[1].to_i
+          number = number.to_s.split(".")[0]
+
+          number = number.rjust(33,'0').reverse
           groups = number.scan(/.../)
 
           words << number_to_words(groups[0].reverse)
@@ -40,13 +42,20 @@ module NumberToWords
               words << number_to_words(groups[number].reverse)
             end
           end
-
         end
-
-        return "#{words.reverse.join(' ')}"
+        return "#{words.reverse.join(' ')} #{conector} #{decimal}/100"
       end
 
       protected
+
+      def conector
+        case I18n.locale
+        when :en
+          "with"
+        when :es
+          "con"
+        end
+      end
 
       def and_string
         "y" if I18n.locale == :es
@@ -132,7 +141,7 @@ module NumberToWords
             text << (units == 0 ? self.tens[tens] : self.teens[units])
             when 2
             text << (units == 0 ? self.tens[tens] : "veniti#{self.units[units]}") if I18n.locale == :es
-            text << self.tens[tens] if I18n.locale == :en
+            text <<  self.units[units] if I18n.locale == :en
           else
             text << self.tens[tens]
           end
