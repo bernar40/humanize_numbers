@@ -15,29 +15,29 @@ module NumberToWords
 
       def to_words
 
-        words = Array.new
+        words = []
 
         number = self.to_i
 
         if number.to_i == 0
-         words << self.zero_string
+          words << self.zero_string
         else
+          number = number.to_s.rjust(33,'0').reverse
+          groups = number.scan(/.../)
 
-          number = number.to_s.rjust(33,'0')
-          groups = number.scan(/.{3}/).reverse
-
-
-          words << number_to_words(groups[0])
+          words << number_to_words(groups[0].reverse)
 
           (1..10).each do |number|
             if groups[number].to_i > 0
               case number
               when 1,3,5,7,9
-                words << "thousand"
+                words << "thousand" if I18n.locale == :en
+                words << "mil" if I18n.locale == :es
               else
-                words << (groups[number].to_i > 1 ? "#{self.quantities[number]}" : "#{self.quantities[number]}")
+                words << (groups[number].reverse.to_i > 1 ? "#{self.quantities[number]}" : "#{self.quantities[number]}") if I18n.locale == :en
+                words << (groups[number].reverse.to_i > 1 ? "#{self.quantities[number]}ones" : "#{self.quantities[number]}ón") if I18n.locale == :es
               end
-              words << number_to_words(groups[number])
+              words << number_to_words(groups[number].reverse)
             end
           end
 
@@ -49,32 +49,65 @@ module NumberToWords
       protected
 
       def and_string
-        ""
+        "y" if I18n.locale == :es
       end
 
       def zero_string
-        "zero"
+        case I18n.locale
+        when :en
+          "zero"
+        when :es
+          "cero"
+        end
       end
 
       def units
-        %w[ ~ one two three four five six seven eight nine ]
+        # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+        case I18n.locale
+        when :en
+          %w[ ~ one two three four five six seven eight nine ]
+        when :es
+          %w[ ~ un dos tres cuatro cinco seis siete ocho nueve ]
+        end
       end
 
       def tens
-        %w[ ~ ten twenty thirty fourty fifty sixty seventy eighty ninety ]
+        # 10, 20, 30, 40, 50, 60, 70, 80, 90
+        case I18n.locale
+        when :en
+          %w[ ~ ten twenty thirty fourty fifty sixty seventy eighty ninety ]
+        when :es
+          %w[ ~ diez veinte treinta cuarenta cincuenta sesenta setenta ochenta noventa ]
+        end
       end
 
       def hundreds
-        [ nil, 'one hundred', 'two hundred', 'three hundred', 'four hundred', 'five hundred', 'six hundred', 
-'seven hundred', 'eight hundred', 'nine hundred']
+        # 100, 200, 300, 400 , 500, 600, 700, 800, 900
+        case I18n.locale
+        when :en
+          [ nil, 'one hundred', 'two hundred', 'three hundred', 'four hundred', 'five hundred', 'six hundred', 'seven hundred', 'eight hundred', 'nine hundred' ]
+        when :es
+          %w[ cien ciento doscientos trescientos cuatrocientos quinientos seiscientos setecientos ochocientos novecientos ]
+        end
       end
 
       def teens
-        %w[ ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen ]
+        # 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+        case I18n.locale
+        when :en
+          %w[ ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen ]
+        when :es
+          %w[ diez once doce trece catorce quince dieciseis diecisiete dieciocho diecinueve ]
+        end
       end
 
       def quantities
-        %w[ ~ ~ million ~ billion ~ trillion ~ ]
+        case I18n.locale
+        when :en
+          %w[ ~ ~ mill ~ bill ~ trill ~ cuatrill ~ quintill ~ ]
+        when :es
+          %w[ ~ ~ million ~ billion ~ trillion ~ ]
+        end
       end
 
       def number_to_words(number)
@@ -83,7 +116,7 @@ module NumberToWords
         tens = number[1,1].to_i
         units = number[2,1].to_i
 
-        text = Array.new
+        text = []
 
         if hundreds > 0
           if hundreds == 1 && (tens + units == 0)
@@ -95,23 +128,24 @@ module NumberToWords
 
         if tens > 0
           case tens
-            when 1
-              text << (units == 0 ? self.tens[tens] : self.teens[units])
-            else
-              text << self.tens[tens]
+          when 1
+            text << (units == 0 ? self.tens[tens] : self.teens[units])
+            when 2
+            text << (units == 0 ? self.tens[tens] : "veniti#{self.units[units]}") if I18n.locale == :es
+            text << self.tens[tens] if I18n.locale == :en
+          else
+            text << self.tens[tens]
           end
         end
 
         if units > 0
           if tens == 0
             text << self.units[units]
-          elsif tens > 1
-            text << "#{self.and_string} #{self.units[units]}"
+          elsif tens > 2
+            text << "#{self.and_string} #{self.units[units]}" if I18n.locale == :es
           end
         end
-
         return text.join(' ')
-
       end
 
     end
