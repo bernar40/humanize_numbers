@@ -162,4 +162,4 @@ module HumanizeNumbers
   end
 end
 
-Numeric.send :include, NumberToWords::Numeric
+Numeric.send :include, HumanizeNumbers::Numeric
