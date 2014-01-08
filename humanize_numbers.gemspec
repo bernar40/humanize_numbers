@@ -7,11 +7,11 @@ Gem::Specification.new do |s|
   s.date = %q{2014-01-07}
   s.description = %q{Gem for Ruby on Rails to describe a number in words for english or spanish}
   s.email = %q{gab.edera@gmail.com}
-  s.extra_rdoc_files = ["README.rdoc", "lib/number_to_words.rb"]
-  s.files = ["number_to_words.gemspec", "Manifest", "README.rdoc", "Rakefile", "init.rb", "lib/number_to_words.rb"]
+  s.extra_rdoc_files = ["README.rdoc", "lib/humanize_numbers.rb"]
+  s.files = ["humanize_numbers.gemspec", "Manifest", "README.rdoc", "Rakefile", "init.rb", "lib/humanize_numbers.rb"]
   s.has_rdoc = true
   s.homepage = %q{https://github.com/gedera/humanize_numbers}
-  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Number_to_words", "--main", "README.rdoc"]
+  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Humanize_numbers", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{Gem for Ruby on Rails to describe a number in words for english or spanish}
