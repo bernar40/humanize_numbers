@@ -17,7 +17,7 @@ And from the command line run:
 
 == Usage
 
-This fork has been modified to return English and Spanish, it isn't perfect:
+This fork has been modified to return English and Spanish, examples:
 
   9736.humanize
   => "nine thousand seven hundred thirty six" (English)
