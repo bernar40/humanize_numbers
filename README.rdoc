@@ -1,6 +1,9 @@
 = Humanize Number
 
-Rails gem/plugin to describe a number in words.
+Rails gem to describe a number in words for English and Spanish. For use english or spanish simply define:
+
+  I18n.locale = :en (English)
+  I18n.locale = :es (Espanish)
 
 == Install
 
