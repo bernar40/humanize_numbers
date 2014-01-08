@@ -13,7 +13,7 @@ module NumberToWords
     module InstanceMethods
 
 
-      def to_words
+      def humanize
 
         words = []
 
