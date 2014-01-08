@@ -23,4 +23,8 @@ This fork has been modified to return English and Spanish, it isn't perfect:
   => "nine thousand seven hundred thirty six" (English)
   => "nueve mil setecientos treinta y seis" (Spanish)
 
+  9736.45.humanize
+  => "nine thousand seven hundred thirty six with 45/100" (English)
+  => "nueve mil setecientos treinta y seis con 45/100" (Spanish)
+
 Enjoy!!!
