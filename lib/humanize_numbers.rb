@@ -1,4 +1,4 @@
-module NumberToWords
+module HumanizeNumbers
   module Numeric
     def self.included(recipient)
       recipient.extend(ClassMethods)

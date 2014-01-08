@@ -1,1 +1,1 @@
-require 'number_to_words'
+require 'humanize_numbers'
