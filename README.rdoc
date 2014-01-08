@@ -6,7 +6,7 @@ Rails gem/plugin to describe a number in words.
 
 Add the following line in to your Gemfile:
 
-gem 'humanize_numbers'
+  gem 'humanize_numbers'
 
 And from the command line run:
 
