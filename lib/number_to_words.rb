@@ -143,6 +143,7 @@ module NumberToWords
             text << self.units[units]
           elsif tens > 2
             text << "#{self.and_string} #{self.units[units]}" if I18n.locale == :es
+            text << self.units[units] if I18n.locale == :en
           end
         end
         return text.join(' ')
