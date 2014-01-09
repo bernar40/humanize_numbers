@@ -159,9 +159,8 @@ module HumanizeNumbers
             text << self.tens[tens] if I18n.locale == :en
             text <<  "#{self.and_string} #{self.tens[tens]}" if I18n.locale == :pt
           else
-            text << self.tens[tens] if I18n.locale == :en
-            text << self.tens[tens] if I18n.locale == :es
-            text << "#{self.and_string} #{self.tens[tens]}" if I18n.locale == :pt
+            text << self.and_string if (I18n.locale == :pt and hundreds > 0)
+            text << self.tens[tens]
           end
         end
 
