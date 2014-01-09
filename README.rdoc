@@ -1,33 +1,35 @@
-= Humanize Number (English, Spanish and Português)
+= Humanize Number
 
-Rails gem to describe a number in words for *English*, *Spanish* and *Português*. For use english, spanish and português simply define:
+Rails gem to describe a number in words for *English*, *Spanish* and *Portugues*. For use english, spanish and portugues simply define:
 
-  +I18n.locale = :en+ (English)
-  +I18n.locale = :es+ (Espanish)
-  +I18n.locale = :pt+ (Português)
+  I18n.locale = :en (English)
+  I18n.locale = :es (Espanish)
+  I18n.locale = :pt (Portugues)
+
+Ideal to be used to print in receipts.
 
 == Install
 
 Add the following line in to your Gemfile:
 
-  +gem 'humanize_numbers', :git => 'git://github.com/gedera/humanize_numbers.git'+
+  gem 'humanize_numbers', :git => 'git://github.com/gedera/humanize_numbers.git'
 
 And from the command line run:
 
-  +bundle install+
+  bundle install
 
 == Usage
 
-This fork has been modified to return English and Spanish Português, examples:
+Examples for return numbers in *english*, *spanish* and *portugues*:
 
-  +9736.humanize+
-  => _"nine thousand seven hundred thirty six"_ (English)
-  => _"nueve mil setecientos treinta y seis"_ (Spanish)
-  => _"nove mil setecentos e trinta e seis"_ (Português)
+  9736.humanize
+  => "nine thousand seven hundred thirty six" (English)
+  => "nueve mil setecientos treinta y seis" (Spanish)
+  => "nove mil setecentos e trinta e seis" (Portugues)
 
-  +9736.45.humanize+
-  => _"nine thousand seven hundred thirty six with 45/100"_ (English)
-  => _"nueve mil setecientos treinta y seis con 45/100"_ (Spanish)
-  => _"nove mil setecentos e trinta e seis com 45/100"_ (Português)
+  9736.45.humanize
+  => "nine thousand seven hundred thirty six with 45/100" (English)
+  => "nueve mil setecientos treinta y seis con 45/100" (Spanish)
+  => "nove mil setecentos e trinta e seis com 45/100" (Portugues)
 
 Enjoy!!!
