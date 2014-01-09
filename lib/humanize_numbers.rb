@@ -35,8 +35,10 @@ module HumanizeNumbers
               when 1,3,5,7,9
                 words << "thousand" if I18n.locale == :en
                 words << "mil" if I18n.locale == :es
+                words << "mil" if I18n.locale == :pt
               else
                 words << (groups[number].reverse.to_i > 1 ? "#{self.quantities[number]}" : "#{self.quantities[number]}") if I18n.locale == :en
+                words << (groups[number].reverse.to_i > 1 ? "#{self.quantities[number]}" : "#{self.quantities[number]}") if I18n.locale == :pt
                 words << (groups[number].reverse.to_i > 1 ? "#{self.quantities[number]}ones" : "#{self.quantities[number]}ón") if I18n.locale == :es
               end
               words << number_to_words(groups[number].reverse)
@@ -54,11 +56,14 @@ module HumanizeNumbers
           "with"
         when :es
           "con"
+        when :pt
+          "com"
         end
       end
 
       def and_string
-        "y" if I18n.locale == :es
+        return "y" if I18n.locale == :es
+        return "e" if I18n.locale == :pt
       end
 
       def zero_string
@@ -77,6 +82,8 @@ module HumanizeNumbers
           %w[ ~ one two three four five six seven eight nine ]
         when :es
           %w[ ~ un dos tres cuatro cinco seis siete ocho nueve ]
+        when :pt
+          %w[ ~ um dois três quatro cinco seis sete oito nove ]
         end
       end
 
@@ -84,9 +91,11 @@ module HumanizeNumbers
         # 10, 20, 30, 40, 50, 60, 70, 80, 90
         case I18n.locale
         when :en
-          %w[ ~ ten twenty thirty fourty fifty sixty seventy eighty ninety ]
+          %w[ ~ ten twenty thirty forty fifty sixty seventy eighty ninety ]
         when :es
           %w[ ~ diez veinte treinta cuarenta cincuenta sesenta setenta ochenta noventa ]
+        when :pt
+          %w[ ~ dez veinte trinta quarenta cinquenta sessenta setenta oitenta noventa ]
         end
       end
 
@@ -97,6 +106,8 @@ module HumanizeNumbers
           [ nil, 'one hundred', 'two hundred', 'three hundred', 'four hundred', 'five hundred', 'six hundred', 'seven hundred', 'eight hundred', 'nine hundred' ]
         when :es
           %w[ cien ciento doscientos trescientos cuatrocientos quinientos seiscientos setecientos ochocientos novecientos ]
+        when :pt
+          %w[ ~ cem duzentos trezentos quatrocentos quinhentos seiscentos setecentos oitocentos novecentos ]
         end
       end
 
@@ -107,6 +118,8 @@ module HumanizeNumbers
           %w[ ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen ]
         when :es
           %w[ diez once doce trece catorce quince dieciseis diecisiete dieciocho diecinueve ]
+        when :pt
+          %W[ dez onze doze treze catorze quinze dezesseis dezessete dezoito dezenove ]
         end
       end
 
@@ -115,7 +128,9 @@ module HumanizeNumbers
         when :en
           %w[ ~ ~ mill ~ bill ~ trill ~ cuatrill ~ quintill ~ ]
         when :es
-          %w[ ~ ~ million ~ billion ~ trillion ~ ]
+          %w[ ~ ~ milli ~ billi ~ trilli ~ ]
+        when :pt
+          %[ ~ ~ milhão ~ bilhão ~ trilhão ~  mil bilhões ~ quintilhões ]
         end
       end
 
@@ -139,11 +154,14 @@ module HumanizeNumbers
           case tens
           when 1
             text << (units == 0 ? self.tens[tens] : self.teens[units])
-            when 2
+          when 2
             text << (units == 0 ? self.tens[tens] : "veniti#{self.units[units]}") if I18n.locale == :es
-            text <<  self.units[units] if I18n.locale == :en
+            text << self.tens[tens] if I18n.locale == :en
+            text <<  "#{self.and_string} #{self.tens[tens]}" if I18n.locale == :pt
           else
-            text << self.tens[tens]
+            text << self.tens[tens] if I18n.locale == :en
+            text << self.tens[tens] if I18n.locale == :es
+            text << "#{self.and_string} #{self.tens[tens]}" if I18n.locale == :pt
           end
         end
 
@@ -152,6 +170,10 @@ module HumanizeNumbers
             text << self.units[units]
           elsif tens > 2
             text << "#{self.and_string} #{self.units[units]}" if I18n.locale == :es
+            text << "#{self.and_string} #{self.units[units]}" if I18n.locale == :pt
+            text << self.units[units] if I18n.locale == :en
+          else
+            text << "#{self.and_string} #{self.units[units]}" if I18n.locale == :pt
             text << self.units[units] if I18n.locale == :en
           end
         end

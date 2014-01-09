@@ -1,9 +1,10 @@
 = Humanize Number
 
-Rails gem to describe a number in words for English and Spanish. For use english or spanish simply define:
+Rails gem to describe a number in words for English and Spanish. For use english, spanish and português simply define:
 
   I18n.locale = :en (English)
   I18n.locale = :es (Espanish)
+  I18n.locale = :pt (Português)
 
 == Install
 
@@ -17,14 +18,16 @@ And from the command line run:
 
 == Usage
 
-This fork has been modified to return English and Spanish, examples:
+This fork has been modified to return English and Spanish Português, examples:
 
   9736.humanize
   => "nine thousand seven hundred thirty six" (English)
   => "nueve mil setecientos treinta y seis" (Spanish)
+  => "nove mil setecentos e trinta e seis" (Português)
 
   9736.45.humanize
   => "nine thousand seven hundred thirty six with 45/100" (English)
   => "nueve mil setecientos treinta y seis con 45/100" (Spanish)
+  => "nove mil setecentos e trinta e seis com 45/100" (Português)
 
 Enjoy!!!
