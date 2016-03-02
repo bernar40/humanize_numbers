@@ -1,3 +1,4 @@
+# coding: utf-8
 module HumanizeNumbers
   module Numeric
     def self.included(recipient)
@@ -155,7 +156,7 @@ module HumanizeNumbers
           when 1
             text << (units == 0 ? self.tens[tens] : self.teens[units])
           when 2
-            text << (units == 0 ? self.tens[tens] : "veniti#{self.units[units]}") if I18n.locale == :es
+            text << (units == 0 ? self.tens[tens] : "veinti#{self.units[units]}") if I18n.locale == :es
             text << self.tens[tens] if I18n.locale == :en
             text <<  "#{self.and_string} #{self.tens[tens]}" if I18n.locale == :pt
           else
