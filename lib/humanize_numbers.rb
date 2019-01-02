@@ -16,7 +16,7 @@ module HumanizeNumbers
       def humanize
 
         words = []
-
+        quantities_array = %w[ ~ ~ milli ~ billi ~ trilli ~ ]
         number = self.to_f
 
         if number.to_i == 0
@@ -30,6 +30,7 @@ module HumanizeNumbers
 
           words << number_to_words(groups[0].reverse)
 
+
           (1..10).each do |number|
             if groups[number].to_i > 0
               case number
@@ -40,7 +41,7 @@ module HumanizeNumbers
               else
                 words << (groups[number].reverse.to_i > 1 ? "#{self.quantities[number]}" : "#{self.quantities[number]}") if I18n.locale == :en
                 words << (groups[number].reverse.to_i > 1 ? "#{self.quantities[number]}" : "#{self.quantities[number]}") if I18n.locale == :pt
-                words << (groups[number].reverse.to_i > 1 ? "#{self.quantities[number]}ones" : "#{self.quantities[number]}ón") if I18n.locale == :es
+                words << (groups[number].reverse.to_i > 1 ? "#{quantities_array[number]}ones" : "#{quantities_array[number]}ón") if I18n.locale == :es
               end
               words << number_to_words(groups[number].reverse)
             end
@@ -140,23 +141,28 @@ module HumanizeNumbers
         hundreds = number[0,1].to_i
         tens = number[1,1].to_i
         units = number[2,1].to_i
+        hundreds_array = %w[ cien ciento doscientos trescientos cuatrocientos quinientos seiscientos setecientos ochocientos novecientos ]
+        units_array = %w[ ~ un dos tres cuatro cinco seis siete ocho nueve ]
+        teens_array = %w[ diez once doce trece catorce quince dieciseis diecisiete dieciocho diecinueve ]
 
         text = []
 
         if hundreds > 0
           if hundreds == 1 && (tens + units == 0)
-            text << self.hundreds[0]
+            #text << self.hundreds[0]
+            text << hundreds_array[0]
           else
-            text << self.hundreds[hundreds]
+            #text << self.hundreds[hundreds]
+            text << hundreds_array[hundreds]
           end
         end
 
         if tens > 0
           case tens
           when 1
-            text << (units == 0 ? self.tens[tens] : self.teens[units])
+            text << (units == 0 ? teens_array[tens] : teens_array[units])
           when 2
-            text << (units == 0 ? self.tens[tens] : "veinti#{self.units[units]}") if I18n.locale == :es
+            text << (units == 0 ? teens_array[tens] : "veinti#{units_array[units]}") if I18n.locale == :es
             text << self.tens[tens] if I18n.locale == :en
             text <<  "#{self.and_string} #{self.tens[tens]}" if I18n.locale == :pt
           else
@@ -167,9 +173,9 @@ module HumanizeNumbers
 
         if units > 0
           if tens == 0
-            text << self.units[units]
+            text << units_array[units]
           elsif tens > 2
-            text << "#{self.and_string} #{self.units[units]}" if I18n.locale == :es
+            text << "#{self.and_string} #{units_array[units]}" if I18n.locale == :es
             text << "#{self.and_string} #{self.units[units]}" if I18n.locale == :pt
             text << self.units[units] if I18n.locale == :en
           else
