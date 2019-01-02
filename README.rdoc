@@ -33,3 +33,5 @@ Examples for return numbers in *english*, *spanish* and *portugues*:
   => "nove mil setecentos e trinta e seis com 45/100" (Portugues)
 
 Enjoy!!!
+
+Credits to https://github.com/gedera/humanize_numbers
