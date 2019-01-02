@@ -167,7 +167,7 @@ module HumanizeNumbers
             text <<  "#{self.and_string} #{self.tens[tens]}" if I18n.locale == :pt
           else
             text << self.and_string if (I18n.locale == :pt and hundreds > 0)
-            text << self.tens[tens]
+            text << teens_array[tens]
           end
         end
 
