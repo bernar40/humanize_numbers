@@ -144,6 +144,7 @@ module HumanizeNumbers
         hundreds_array = %w[ cien ciento doscientos trescientos cuatrocientos quinientos seiscientos setecientos ochocientos novecientos ]
         units_array = %w[ ~ un dos tres cuatro cinco seis siete ocho nueve ]
         teens_array = %w[ diez once doce trece catorce quince dieciseis diecisiete dieciocho diecinueve ]
+        tens_array = %w[ ~ diez veinte treinta cuarenta cincuenta sesenta setenta ochenta noventa ]
 
         text = []
 
@@ -160,14 +161,14 @@ module HumanizeNumbers
         if tens > 0
           case tens
           when 1
-            text << (units == 0 ? teens_array[tens] : teens_array[units])
+            text << (units == 0 ? tens_array[tens] : teens_array[units])
           when 2
-            text << (units == 0 ? teens_array[tens] : "veinti#{units_array[units]}") if I18n.locale == :es
+            text << (units == 0 ? tens_array[tens] : "veinti#{units_array[units]}") if I18n.locale == :es
             text << self.tens[tens] if I18n.locale == :en
             text <<  "#{self.and_string} #{self.tens[tens]}" if I18n.locale == :pt
           else
             text << self.and_string if (I18n.locale == :pt and hundreds > 0)
-            text << teens_array[tens]
+            text << tens_array[tens]
           end
         end
 
