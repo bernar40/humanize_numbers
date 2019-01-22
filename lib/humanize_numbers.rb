@@ -22,7 +22,7 @@ module HumanizeNumbers
         if number.to_i == 0
           words << self.zero_string
         else
-          decimal = number.to_s.split(".")[1].nil? ? 0 : number.to_s.split(".")[1].to_i
+          decimal = number.to_s.split(".")[1].nil? ? 0 : number.to_s.split(".")[1]
           number = number.to_s.split(".")[0]
 
           number = number.rjust(33,'0').reverse
