@@ -35,12 +35,11 @@ module HumanizeNumbers
 
           (1..10).each do |number|
             if groups[number].to_i > 0
-              case number
-              when 1,3,5,7,9
-                words << "mil" if I18n.locale == :es
-              else
-                words << (groups[number].reverse.to_i > 1 ? "#{quantities_array_es[number]}ones" : "#{quantities_array_es[number]}ón")
-              end
+              if number == 1 || number == 3 || number == 5 || number == 7 || number == 9
+                  words << "mil"
+                else
+                  words << (groups[number].reverse.to_i > 1 ? "#{quantities_array_es[number]}ones" : "#{quantities_array_es[number]}ón")
+                end
               words << number_to_words(groups[number].reverse)
             end
           end
